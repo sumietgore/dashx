@@ -31,7 +31,7 @@ type launch = {
 const getLaunches = (offset: number = 0) =>
   fetch(
     `https://api.spacexdata.com/v3/launches?limit=${PAGE_SIZE}&offset=${offset}`
-  ).then((res) => res.json());
+    , { next: { revalidate: 600 } }).then((res) => res.json());
 
 async function loadMoreLaunches(offset: number = 0) {
   "use server";
